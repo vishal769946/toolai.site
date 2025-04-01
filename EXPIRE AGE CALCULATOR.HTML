@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Expiration Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.97);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1f2937;
+            margin-bottom: 2rem;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        .duration-input {
+            display: flex;
+            gap: 1rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 8px rgba(99, 102, 241, 0.2);
+        }
+
+        select {
+            appearance: none;
+            background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 0.8rem center/16px 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        .result-card {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .result-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result-label {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            color: #1f2937;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .error-message {
+            color: #ef4444;
+            text-align: center;
+            margin: 1rem 0;
+            font-weight: 500;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Date Calculator</h1>
+        <div class="input-group">
+            <label for="start-date">Start Date</label>
+            <input type="date" id="start-date" required>
+        </div>
+        
+        <div class="input-group">
+            <label>Add Duration</label>
+            <div class="duration-input">
+                <input type="number" id="duration" placeholder="0" min="1" required>
+                <select id="unit">
+                    <option value="days">Days</option>
+                    <option value="months">Months</option>
+                    <option value="years">Years</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="error-message" id="error"></div>
+        <button onclick="calculateExpiration()">Calculate</button>
+        
+        <div class="result-card" id="result-card">
+            <div class="result-label">Expiration Date</div>
+            <div class="result-value" id="result-date"></div>
+        </div>
+    </div>
+
+    <script>
+        function calculateExpiration() {
+            const startDateInput = document.getElementById('start-date');
+            const durationInput = document.getElementById('duration');
+            const unitSelect = document.getElementById('unit');
+            const errorElement = document.getElementById('error');
+            const resultCard = document.getElementById('result-card');
+            const resultDate = document.getElementById('result-date');
+
+            // Reset states
+            errorElement.style.display = 'none';
+            resultCard.classList.remove('show');
+
+            // Validate inputs
+            if (!startDateInput.value || !durationInput.value) {
+                showError('Please fill in all fields');
+                return;
+            }
+
+            const duration = parseInt(durationInput.value);
+            if (duration < 1) {
+                showError('Duration must be at least 1');
+                return;
+            }
+
+            // Calculate expiration date
+            const startDate = new Date(startDateInput.value);
+            const unit = unitSelect.value;
+            const result = new Date(startDate);
+
+            switch(unit) {
+                case 'days':
+                    result.setDate(result.getDate() + duration);
+                    break;
+                case 'months':
+                    result.setMonth(result.getMonth() + duration);
+                    break;
+                case 'years':
+                    result.setFullYear(result.getFullYear() + duration);
+                    break;
+            }
+
+            // Handle edge cases when adding months
+            if (unit === 'months' && startDate.getDate() !== result.getDate()) {
+                result.setDate(0);
+            }
+
+            // Format result
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            resultDate.textContent = result.toLocaleDateString('en-US', options);
+            
+            resultCard.classList.add('show');
+        }
+
+        function showError(message) {
+            const errorElement = document.getElementById('error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
