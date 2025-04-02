@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #0f172a;
+            --light: #f8fafc;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            padding: 1.5rem 5%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            margin-top: 80px;
+            background: linear-gradient(45deg, #f3f4f6, #ffffff);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            background: #f1f5f9;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">TOOLAI.SITE</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#Store">Store</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <i class="fas fa-bars menu-btn"></i>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Transform Your Digital Experience</h1>
+                <p>Create amazing web experiences with our cutting-edge solutions and innovative approach to modern web design.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary">Get Started</button>
+                    <button class="btn btn-secondary">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="C:\Users\ASHOK\OneDrive\Desktop\web site\websit\p2.jpg" alt="Hero Image">
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-rocket feature-icon"></i>
+                <h3>Fast Performance</h3>
+                <p>Lightning-fast loading times and smooth interactions for optimal user experience.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <h3>Secure Platform</h3>
+                <p>Enterprise-grade security measures to protect your data and privacy.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-magic feature-icon"></i>
+                <h3>Modern Design</h3>
+                <p>Cutting-edge interfaces that engage and convert your audience.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-magic feature-icon"></i>
+           <a href="C:\Users\ASHOK\OneDrive\Desktop\web site\websit\image to png.html" target="blank"><h3>IMAGE JPEG, PNG, WEBP, BMP, GIF 
+              </h3></a>
+
+              <p>Cutting-edge interfaces that engage and convert your audience.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-magic feature-icon"></i>
+               <a href="C:\Users\ASHOK\OneDrive\Desktop\web site\websit\height.html" target="blank"><h3>BMI Calculator
+               </h3></a>
+                <p>Cutting-edge interfaces that engage and convert your audience.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-magic feature-icon"></i>
+               <a href="C:\Users\ASHOK\OneDrive\Desktop\web site\websit\EXPIRE AGE CALCULATOR.html" target="blank"><h3>           EXPIRE AGE CALCULATOR
+               </h3></a>
+                <p>Cutting-edge interfaces that engage and convert your audience.</p>
+            </div>
+            
+               <div class="feature-card">
+                <i class="fas fa-magic feature-icon"></i>
+               <a href="C:\Users\ASHOK\OneDrive\Desktop\web site\websit\Pdf To Image.html" target="blank"><h3>           PDF TO IMAGE
+               </h3></a>
+                <p>Cutting-edge interfaces that engage and convert your audience.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-btn').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll Animation
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < window.innerHeight - 100) {
+                    card.classList.add('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
